@@ -3,12 +3,13 @@
 %global gh_user jc21
 
 Name:           route53-ddns
-Version:        1.0.3
+Version:        1.0.4
 Release:        1%{?dist}
 Summary:        A command to detect your public IP and update a route53 A record when changed
 Group:          Applications/System
 License:        MIT
 URL:            https://github.com/%{gh_user}/%{name}
+Source:         https://github.com/%{gh_user}/%{name}/archive/v%{version}.tar.gz
 BuildRequires:  git golang
 
 %description
@@ -18,27 +19,21 @@ Do you have a dynamically assigned IP address?
 This is the command for you.
 
 %prep
-wget https://github.com/%{gh_user}/%{name}/archive/v%{version}.tar.gz
-tar xzf v%{version}.tar.gz
-mkdir -p %{_builddir}/src/github.com/%{gh_user}/
-cd %{_builddir}/src/github.com/%{gh_user}/
-ln -snf %{_builddir}/%{name}-%{version} %{name}
-cd %{name}
+%setup -qn %{name}-%{version}
 
 %build
-export GOPATH="%{_builddir}"
-export PATH=$PATH:"%{_builddir}"/bin
-cd %{_builddir}/src/github.com/%{gh_user}/%{name}
-export GO111MODULE=on
-go build -o %{_builddir}/bin/%{name} cmd/%{name}/main.go
+go build -o bin/%{name} cmd/%{name}/main.go
 
 %install
-install -Dm0755 %{_builddir}/bin/%{name} %{buildroot}%{_bindir}/%{name}
+install -Dm0755 bin/%{name} %{buildroot}%{_bindir}/%{name}
 
 %files
 %{_bindir}/%{name}
 
 %changelog
+* Mon May 11 2020 Jamie Curnow <jc@jc21.com> 1.0.4-1
+- v1.0.4
+
 * Fri Jul 26 2019 Jamie Curnow <jc@jc21.com> 1.0.3-1
 - v1.0.3
 
