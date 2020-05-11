@@ -3,7 +3,7 @@
 %global gh_user jc21
 
 Name:           route53-ddns
-Version:        1.0.4
+Version:        1.0.5
 Release:        1%{?dist}
 Summary:        A command to detect your public IP and update a route53 A record when changed
 Group:          Applications/System
@@ -31,6 +31,9 @@ install -Dm0755 bin/%{name} %{buildroot}%{_bindir}/%{name}
 %{_bindir}/%{name}
 
 %changelog
+* Mon May 11 2020 Jamie Curnow <jc@jc21.com> 1.0.5-1
+- v1.0.5
+
 * Mon May 11 2020 Jamie Curnow <jc@jc21.com> 1.0.4-1
 - v1.0.4
 
