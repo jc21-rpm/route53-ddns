@@ -4,7 +4,7 @@
 
 Name:           route53-ddns
 Version:        1.0.6
-Release:        1
+Release:        1%{?dist}
 Summary:        A command to detect your public IP and update a route53 A record when changed
 Group:          Applications/System
 License:        MIT
